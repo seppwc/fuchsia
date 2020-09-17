@@ -1,0 +1,8 @@
+{
+  "port": 8000,
+  "views": "/views",
+  "viewEngine": "ejs",
+  "static": "/public",
+  "bodyParser": true,
+  "urlEncoded": true
+}
