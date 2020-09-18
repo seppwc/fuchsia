@@ -5,11 +5,8 @@ The JSX/TSX web application framework built upon express - build declarative web
 ```javascript
 
 
-import {h,
-  FuchsiaFactory,
-  Controller,
-  Route
-} from '@fuchsiajs/core';
+import { h , FuchsiaFactory } from '@fuchsiajs/core';
+import {Controller , Route} from '@fuchsiajs/common';
 import config from './Fuchsia.config.json';
 
 const AppController = () => {
