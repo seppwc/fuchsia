@@ -1,6 +1,5 @@
-import { h, Controller } from '../src';
-import { Request, Response } from 'express';
-import { Route } from '../src';
+import { h } from '../packages/core';
+import { Route, Controller, Request, Response } from '../packages/common';
 
 export const AppController = (): Controller => {
   const Hello = ({ message }: any) => (_: Request, res: Response) => {

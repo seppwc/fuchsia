@@ -1,5 +1,5 @@
 import express, { Application } from 'express';
-import { Controller } from './Controller';
+import { Controller } from '../common/Controller';
 
 interface IFuchsiaApplicationOptions {
   controllers: Controller[];

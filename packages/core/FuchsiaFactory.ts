@@ -1,4 +1,4 @@
-import { Controller } from './Controller';
+import { Controller } from '../common/Controller';
 import { FuchsiaApplication } from './FuchsiaApplication';
 
 interface IConfigOptions {

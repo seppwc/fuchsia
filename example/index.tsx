@@ -1,4 +1,4 @@
-import { h, FuchsiaFactory, FuchsiaApplication } from '../src';
+import { h, FuchsiaFactory, FuchsiaApplication } from '../packages/core';
 import { AppController } from './AppController';
 import config from './Fuchsia.config.json';
 
