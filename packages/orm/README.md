@@ -10,7 +10,7 @@ const Episode = () => (
     <Field name='name'>
       <String />
     </Field>
-    <Field name='Length' unit={LengthUnit('Meter')}>
+    <Field name='Length' unit={{ lengthUnit: 'meter' }}>
       <Float />
     </Field>
   </Object>
