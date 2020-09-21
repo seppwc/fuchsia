@@ -6,8 +6,8 @@ The JSX/TSX web application framework built upon express - build declarative web
 
 
 import { h , FuchsiaFactory } from '@fuchsiajs/core';
-import {Controller , Route} from '@fuchsiajs/common';
-import config from './Fuchsia.config.json';
+import { Controller , Route } from '@fuchsiajs/common';
+import { MongooseAdapter } from '@fuchsiajs/orm'
 
 const AppController = () => {
 
@@ -43,7 +43,22 @@ const AppController = () => {
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
     controllers: [<AppController />],
-    config,
+    database: {
+      adapter: <MongooseAdapter />,
+      uri: process.env.DB_URI,
+      options: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+    },
+    config: {
+      port: 1234,
+      views: '/views',
+      viewEngine: 'hbs',
+      static: '/public',
+      bodyParser: true,
+      urlEncoded: true,
+    },
   });
 
   await app.listen();
