@@ -1,7 +1,9 @@
 import express, { Application } from 'express';
 import { Controller } from '../common/Controller';
+import { ConfigLoader } from './Config.Loader';
+import { IConfigOptions } from './interfaces';
 
-interface IFuchsiaApplicationOptions {
+interface IFuchsiaApplicationModules {
   controllers: Controller[];
 }
 
@@ -9,12 +11,22 @@ export class FuchsiaApplication {
   app: Application;
 
   controllers: Controller[];
-  constructor(options: IFuchsiaApplicationOptions, public port: number = 8000) {
+  constructor(
+    modules: IFuchsiaApplicationModules,
+    public options: Partial<IConfigOptions>,
+    public port: number = 8000
+  ) {
     this.app = express();
+
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
-    this.controllers = options.controllers;
+    this.controllers = modules.controllers;
+    this.loadOptions();
     this.handle();
+  }
+
+  private async loadOptions(): Promise<void> {
+    ConfigLoader.load(this.app, this.options);
   }
 
   private async handle(): Promise<void> {
