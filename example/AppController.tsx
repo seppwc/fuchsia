@@ -1,3 +1,4 @@
+import { h } from '../packages/core';
 import { Route, Controller, Request, Response } from '../packages/common';
 
 export const AppController = (): Controller => {

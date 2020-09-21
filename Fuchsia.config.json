@@ -1,9 +1,10 @@
 {
-  "port": 5555,
-  "views": "/views",
-  "viewEngine": "/ejs",
-  "static": "/public",
   "bodyParser": true,
+  "viewEngine": "ejs",
+  "views": "/views",
+  "static": "/publilc",
+  "urlEncoded": true,
+  "port": 5555,
   "databaseOptions": {
     "useNewUrlParser": true,
     "useUnifiedTopology": true
