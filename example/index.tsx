@@ -1,11 +1,14 @@
 import { h, FuchsiaFactory, FuchsiaApplication } from '../packages/core';
+import { MongooseAdapter } from '../packages/orm';
 import { AppController } from './AppController';
-import config from './Fuchsia.config.json';
 
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
     controllers: [<AppController />],
-    config,
+    database: {
+      adapter: <MongooseAdapter />,
+      uri: process.env.DB_URI,
+    },
   });
 
   await app.listen();

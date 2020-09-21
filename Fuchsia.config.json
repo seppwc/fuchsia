@@ -1,0 +1,12 @@
+{
+  "port": 8080,
+  "views": "/views",
+  "viewEngine": "ejs",
+  "static": "/public",
+  "bodyParser": true,
+  "urlEncoded": true,
+  "databaseOptions": {
+    "useNewUrlParser": true,
+    "useUnifiedTopology": true
+  }
+}

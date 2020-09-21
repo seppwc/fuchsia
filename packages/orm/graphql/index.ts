@@ -1,1 +1,1 @@
-export class G {}
+export * from './graphql.adapter';

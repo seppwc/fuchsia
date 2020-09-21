@@ -1,26 +1,29 @@
-import { Controller } from '../common/Controller';
 import { FuchsiaApplication } from './FuchsiaApplication';
-
-interface IConfigOptions {
-  static: string | string[];
-  views: string;
-  viewEngine: string;
-  urlEncoded: boolean;
-  bodyParser: boolean;
-  port: number;
-}
-
-interface IFuchsiaFactoryParams {
-  controllers: Controller[];
-  config?: Partial<IConfigOptions>;
-}
+import { IFuchsiaFactoryParams } from './interfaces';
+import { DatabaseLoader } from '../orm/database.loader';
+import { ConfigParser } from './Config.parser';
 
 export class FuchsiaFactory {
   public static async create(
     params: IFuchsiaFactoryParams
   ): Promise<FuchsiaApplication> {
-    const { config, ...p } = params;
-    console.log(config);
+    let { config, database, ...p } = params;
+
+    let parsedFileData = await ConfigParser.parse();
+
+    if (!config) {
+      config = parsedFileData.config;
+    }
+
+    if (database) {
+      let { adapter, uri, options } = database;
+
+      if (!options) {
+        options = parsedFileData.database.options;
+      }
+
+      uri && (await new DatabaseLoader(adapter).connect(uri, options));
+    }
 
     return await new FuchsiaApplication(p, config && config.port);
   }

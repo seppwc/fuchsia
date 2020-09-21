@@ -1,1 +1,1 @@
-export class M {}
+export * from './mongoose.adapter';

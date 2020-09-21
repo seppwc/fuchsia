@@ -1,1 +1,1 @@
-export class S {}
+export * from './sql.adapter';
