@@ -11,6 +11,8 @@ export class FuchsiaApplication {
   controllers: Controller[];
   constructor(options: IFuchsiaApplicationOptions, public port: number = 8000) {
     this.app = express();
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
     this.controllers = options.controllers;
     this.handle();
   }

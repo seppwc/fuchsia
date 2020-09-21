@@ -11,6 +11,7 @@ export class FuchsiaFactory {
     let { config, database, ...p } = params;
 
     let parsedFileData = await ConfigParser.parse();
+    console.log(parsedFileData);
 
     if (!config) {
       config = parsedFileData.config;
