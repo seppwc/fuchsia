@@ -5,13 +5,12 @@ import {
   Request,
   FuchsiaResponse,
 } from '../packages/common';
-import { User } from './User';
-import { Document } from 'mongoose';
+import User, { UserModel } from './User';
 
 export const AppController = (): Controller => {
-  const GetUsers = async (): Promise<FuchsiaResponse<Document[]>> => {
+  const GetUsers = async (): Promise<FuchsiaResponse<UserModel[]>> => {
     try {
-      const users = await User.find();
+      const users: UserModel[] = await User.find();
       return { message: 'Success', payload: users };
     } catch (err) {
       return { message: 'Error', errors: err };
@@ -29,7 +28,7 @@ export const AppController = (): Controller => {
 
   const CreateUser = async (
     req: Request
-  ): Promise<FuchsiaResponse<Document>> => {
+  ): Promise<FuchsiaResponse<UserModel>> => {
     try {
       const name = req.body.name;
       const newUser = await new User({ name }).save();
@@ -41,10 +40,11 @@ export const AppController = (): Controller => {
 
   const UpdateUser = async (req: Request): Promise<FuchsiaResponse<any>> => {
     try {
-      const user = User.updateOne(
+      const user = User.findByIdAndUpdate(
         { _id: req.params.id },
-        { name: req.body.id }
+        { name: req.body.name }
       );
+
       return { message: 'Success', payload: user };
     } catch (err) {
       return { message: 'Error', errors: err };
@@ -53,7 +53,7 @@ export const AppController = (): Controller => {
 
   const DeleteUser = async (req: Request): Promise<FuchsiaResponse<any>> => {
     try {
-      const result = await User.deleteOne({ _id: req.params.id });
+      const result = await User.findByIdAndDelete({ _id: req.params.id });
       return { message: 'Success', payload: result };
     } catch (err) {
       return { message: 'Error', errors: err };
