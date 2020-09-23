@@ -12,16 +12,14 @@ import { Controller , Route } from '@fuchsiajs/common';
 
 const AppController = () => {
 
-  const HelloWorld = () => (req, res) => {
-    res.json({hello: "world"});
+  const HelloWorld = () => (req):Promise<string> => {
+    return 'hello world'
   };
 
 
   return (
     <Controller path='/'>
-      <Route method='GET' path='/'>
-        <HelloWorld />
-      </Route>
+      <Route method='GET' path='/' callback={HelloWorld} />
     </Controller>
   );
 
@@ -65,12 +63,12 @@ Routes are components which are nested in a controller, they define the individu
 const AppController = () => {
   return(
     <Controller path='/hello'>
-      <Route method="get" path="/">...</Route>
-      <Route method="get" path="/:id">...</Route>
-      <Route method="post" path="/">...</Route>
-      <Route method="put" path="/:id">...</Route>
-      <Route method="patch" path="/:id">...</Route>
-      <Route method="delete" path="/:id">...</Route>
+      <Route method="get" path="/" callback={...}/>
+      <Route method="get" path="/:id" callback={...}/>
+      <Route method="post" path="/" callback={...}/>
+      <Route method="put" path="/:id" callback={...}/>
+      <Route method="patch" path="/:id" callback={...}/>
+      <Route method="delete" path="/:id" callback={...}/>
     </Controller>;
   )
 };
@@ -78,44 +76,72 @@ const AppController = () => {
 
 ### Route Callbacks
 
-Route callbacks the function that gets called when the route is executed. these are defined as curried functions that return a callback which will receive the request and response objects.
+Route callbacks the function that gets called when the route is executed. these are defined as functions which receive one param (Request) within the controller scope that return promise, by default the return value will be included in an express 'res.send' response
 
 ```javascript
 const AppController = () => {
 
-//  Note the curried function!
-  const GetOne = () => (req, res) => {
-    res.send('hello world')
+  const HelloWorld = (req: Request):Promise<string> => {
+    return 'hello world'
   }
 
   return(
     <Controller path='/hello'>
-      <Route method="get" path="/">
-        <GetOne />
-      </Route>
+      <Route method="get" path="/" callback={HelloWorld} />
     </Controller>;
   )
 };
 ```
 
-props can be passed to the Route and will be accessible via the outer function.
+### Route Response Type
 
 ```javascript
+
+type FuchsiaResponse<T> = {
+  message: 'Success' | 'Error',
+  payload?: T,
+  error?: string
+}
+
+
 const AppController = () => {
 
-//  Note the curried function!
-  const GetOne = (prop) => (req, res) => {
-    res.send('hello' + props.msg)
+  const HelloWorld = (req: Request): Promise<FuchsiaResponse<string>> => {
+    try {
+        return {message: 'Success', payload: 'Hello World'}
+    } catch(err) {
+       return {message: 'Error', errors: err}
+    }
+
   }
 
   return(
     <Controller path='/hello'>
-      <Route method="get" path="/">
-        <GetOne msg="Hi" />
-      </Route>
+      <Route method="get" path="/" callback={HelloWorld} />
     </Controller>;
   )
 };
+```
+
+```json
+//successfull
+{
+  "message": "Success",
+  "payload": T
+}
+
+//error
+{
+  "message": "Error",
+  "error": {
+        "stringValue": [ERROR MESSAGE],
+        "kind": [ERROR KIND],
+        "value": [ERROR VALUE],
+        "path": {ERROR PATH],
+        "reason": {}
+    }
+}
+
 ```
 
 ### adding a controller to your application
