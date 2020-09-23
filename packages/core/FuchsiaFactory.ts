@@ -1,6 +1,6 @@
 import { FuchsiaApplication } from './FuchsiaApplication';
 import { IFuchsiaFactoryParams } from './interfaces';
-import { DatabaseLoader } from '../orm/database.loader';
+import { DatabaseLoader } from '@fuchsiajs/orm/database.loader';
 import { ConfigParser } from './Config.parser';
 
 export class FuchsiaFactory {

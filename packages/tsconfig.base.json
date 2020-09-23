@@ -7,7 +7,7 @@
     "jsxFactory": "h",
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": true,
-    "outDir": "./dist",
+    "outDir": "./../dist",
     "declaration": true,
     "skipLibCheck": true,
     "noLib": false,
@@ -30,6 +30,5 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "exclude": ["node_modules"],
-  "include": ["./packages/**/*.tsx", "./packages/**/*.ts"]
+  "exclude": ["node_modules"]
 }

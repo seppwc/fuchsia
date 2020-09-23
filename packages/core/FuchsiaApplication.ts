@@ -1,16 +1,16 @@
 import express, { Application } from 'express';
-import { Controller } from '../common/Controller';
+import { Controller } from '@fuchsiajs/common';
 import { ConfigLoader } from './Config.Loader';
 import { IConfigOptions } from './interfaces';
 
 interface IFuchsiaApplicationModules {
-  controllers: Controller[];
+  controllers: [Controller];
 }
 
 export class FuchsiaApplication {
   app: Application;
 
-  controllers: Controller[];
+  controllers: [Controller];
   constructor(
     modules: IFuchsiaApplicationModules,
     public options: Partial<IConfigOptions>,

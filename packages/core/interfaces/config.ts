@@ -1,4 +1,4 @@
-import { DatabaseAdapter } from '../../orm/adapter.abstract';
+import { DatabaseAdapter } from '@fuchsiajs/orm/adapter.abstract';
 import { ConnectionOptions } from 'mongoose';
 
 export interface IConfigOptions {
