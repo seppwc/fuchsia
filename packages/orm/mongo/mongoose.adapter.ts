@@ -12,7 +12,7 @@ export class MongooseAdapter extends DatabaseAdapter {
     try {
       mongoose.connect(connection, options);
       this.db = mongoose.connection;
-      this.db.on('open', this.handleConnectionSuccess.bind(this));
+      this.db.on('connected', this.handleConnectionSuccess.bind(this));
       this.db.on('error', this.handleConnectionError.bind(this));
     } catch (err) {
       console.log('DATATBASE CONNECTION ERROR: ' + err);
