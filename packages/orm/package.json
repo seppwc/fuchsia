@@ -1,6 +1,6 @@
 {
   "name": "@fuchsiajs/orm",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax (@orm)",
   "main": "index.js",
   "repository": {
@@ -14,6 +14,9 @@
   "license": "MIT",
   "dependencies": {
     "tslib": "^2.0.1"
+  },
+  "devDependencies": {
+    "@types/mongoose": "^5.7.36"
   },
   "peerDependencies": {
     "mongoose": "^5.10.5"
