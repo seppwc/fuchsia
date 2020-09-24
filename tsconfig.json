@@ -30,6 +30,6 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
   "include": ["./packages/**/*.tsx", "./packages/**/*.ts"]
 }
