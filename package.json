@@ -1,5 +1,5 @@
 {
-  "name": "@fuchsiajs/core",
+  "name": "@fuchsiajs/main",
   "version": "1.0.1",
   "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax",
   "scripts": {
