@@ -1,0 +1,15 @@
+name: test-action
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: install dependancies
+        run: npm install
+      - name: runs tests
+      - run: npm test
