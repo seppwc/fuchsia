@@ -1,4 +1,6 @@
-export default {
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
   roots: ['./packages/core', './packages/common', './packages/orm'],
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
