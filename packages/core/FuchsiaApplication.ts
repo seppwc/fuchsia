@@ -8,7 +8,7 @@ interface IFuchsiaApplicationModules {
 }
 
 export class FuchsiaApplication {
-  app: Application;
+  instance: Application;
 
   controllers: [Controller];
   constructor(
@@ -16,31 +16,31 @@ export class FuchsiaApplication {
     public options: Partial<IConfigOptions>,
     public port: number = 8000
   ) {
-    this.app = express();
+    this.instance = express();
 
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true }));
+    this.instance.use(express.json());
+    this.instance.use(express.urlencoded({ extended: true }));
     this.controllers = modules.controllers;
     this.loadOptions();
     this.handle();
   }
 
   public get settings() {
-    return this.app.settings;
+    return this.instance.settings;
   }
 
   private async loadOptions(): Promise<void> {
-    ConfigLoader.load(this.app, this.options);
+    ConfigLoader.load(this.instance, this.options);
   }
 
   private async handle(): Promise<void> {
     this.controllers.forEach((c) => {
-      this.app.use(c.path, c.router);
+      this.instance.use(c.path, c.router);
     });
   }
 
   public async listen(): Promise<void> {
-    this.app.listen(this.port, () => {
+    this.instance.listen(this.port, () => {
       console.log('listening on port ' + this.port);
     });
   }
