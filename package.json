@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax",
   "scripts": {
+    "test": "jest",
     "start:tsx": "ts-node -r dotenv/config ./example/index.tsx",
     "data": "ts-node ./packages/orm/database.ts",
     "start:js": "node -r dotenv/config ./dist/index.js",
