@@ -25,6 +25,10 @@ export class FuchsiaApplication {
     this.handle();
   }
 
+  public get settings() {
+    return this.app.settings;
+  }
+
   private async loadOptions(): Promise<void> {
     ConfigLoader.load(this.app, this.options);
   }
