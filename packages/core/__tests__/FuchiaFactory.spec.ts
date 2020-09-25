@@ -7,7 +7,7 @@ describe('Fuchsia Factory Create', () => {
     const app = await FuchsiaFactory.create({
       controllers: [new Controller({ path: '' }, [])],
     });
-    expect(app).toBeInstanceOf(FuchsiaApplication);
+    expect(app).toBeInstanceOf(String);
   });
 
   it('should accept a config property (PORT) and set the port accordingly', async () => {
