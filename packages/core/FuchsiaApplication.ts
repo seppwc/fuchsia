@@ -26,7 +26,9 @@ export class FuchsiaApplication {
   }
 
   public get settings() {
+
     return this.instance.settings;
+
   }
 
   private async loadOptions(): Promise<void> {

@@ -30,5 +30,7 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
+
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.*.spec.ts"]
+
 }
