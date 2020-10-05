@@ -19,16 +19,16 @@ export class FuchsiaApplication {
     this.instance = express();
 
     this.instance.use(express.json());
+    this.instance.settings.json = true;
     this.instance.use(express.urlencoded({ extended: true }));
+    this.instance.settings.urlEncoded = { extended: true };
     this.controllers = modules.controllers;
     this.loadOptions();
     this.handle();
   }
 
   public get settings() {
-
     return this.instance.settings;
-
   }
 
   private async loadOptions(): Promise<void> {

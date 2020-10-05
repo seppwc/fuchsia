@@ -4,9 +4,9 @@ import { ConnectionOptions } from 'mongoose';
 export interface IConfigOptions {
   [key: string]: any;
   port: number;
-  urlEncoded: IUrlEncodedOptions;
-  bodyParser: IBodyParserOptions;
-  static: IStaticOptions | string;
+  urlEncoded: Partial<IUrlEncodedOptions>;
+  json: Partial<IJsonOptions> | boolean;
+  static: Partial<IStaticOptions> | string;
   'case sensitive routing': boolean;
   env: string;
   etag: string[];
@@ -32,7 +32,7 @@ interface IUrlEncodedOptions {
   type: string | string[] | any;
 }
 
-interface IBodyParserOptions {
+interface IJsonOptions {
   strict: boolean;
   inflate: boolean;
   limit: number;
@@ -41,7 +41,7 @@ interface IBodyParserOptions {
 
 interface IStaticOptions {
   [key: string]: any;
-  dotfiles: string;
+  dotfiles: 'allow' | 'deny' | 'ignore';
   etag: boolean;
   extensions: string[];
   fallthrough: string;
