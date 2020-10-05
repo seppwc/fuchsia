@@ -9,26 +9,28 @@ interface IFuchsiaApplicationModules {
 
 export class FuchsiaApplication {
   instance: Application;
-
+  private _settings: Partial<IConfigOptions>;
   controllers: [Controller];
   constructor(
     modules: IFuchsiaApplicationModules,
     public options: Partial<IConfigOptions>,
-    public port: number = 8000
+    public port: number
   ) {
     this.instance = express();
+    this._settings = {
+      ...this.instance.settings,
+      port: this.port || 8080,
+      ...options,
+    };
 
-    this.instance.use(express.json());
-    this.instance.settings.json = true;
-    this.instance.use(express.urlencoded({ extended: true }));
-    this.instance.settings.urlEncoded = { extended: true };
     this.controllers = modules.controllers;
     this.loadOptions();
+    console.log(this._settings);
     this.handle();
   }
 
   public get settings() {
-    return this.instance.settings;
+    return this._settings;
   }
 
   private async loadOptions(): Promise<void> {
@@ -42,8 +44,8 @@ export class FuchsiaApplication {
   }
 
   public async listen(): Promise<void> {
-    this.instance.listen(this.port, () => {
-      console.log('listening on port ' + this.port);
+    this.instance.listen(this._settings.port, () => {
+      console.log('listening on port ' + this._settings.port);
     });
   }
 }
