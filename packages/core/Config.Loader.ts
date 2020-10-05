@@ -1,5 +1,10 @@
 import { Application } from 'express';
-import { IConfigOptions } from './interfaces';
+import {
+  IConfigOptions,
+  IJsonOptions,
+  IStaticOptions,
+  IUrlEncodedOptions,
+} from './interfaces';
 import express from 'express';
 
 export class ConfigLoader {
@@ -7,41 +12,46 @@ export class ConfigLoader {
     app: Application,
     options: Partial<IConfigOptions>
   ): Promise<void> {
-    options.urlEncoded && ConfigLoader.urlEncoded(app, options);
-    options.bodyParser && ConfigLoader.bodyParser(app, options);
-    options.static && ConfigLoader.static(app, options);
-    // ConfigLoader.set();
+    options.urlEncoded && ConfigLoader.urlEncoded(app, options.urlEncoded);
+    options.json && ConfigLoader.json(app, options.json);
+    options.static && ConfigLoader.static(app, options.static);
+    // ConfigLoader.set(app, options);
   }
 
-  //   private static async set(
-  //     app: Application,
-  //     options: Partial<IConfigOptions>
-  //   ) {}
+  // private static async set(
+  //   app: Application,
+  //   options: Partial<IConfigOptions>
+  // ) {}
 
   private static async static(
     app: Application,
-    options: Partial<IConfigOptions>
+    options: Partial<IStaticOptions> | string
   ) {
-    if (typeof options.static === 'string') {
-      app.use(express.static(options.static));
+    if (typeof options === 'string') {
+      app.use(express.static(options));
+      app.settings.static = options;
     } else {
-      for (let i in options.static) {
-        app.use(express.static(options.static[i]));
-      }
+      const { root, ...rest } = options;
+      app.use(express.static(root, rest));
+      app.settings.static = options;
     }
   }
 
-  private static async bodyParser(
+  private static async json(
     app: Application,
-    options: Partial<IConfigOptions>
+    options: Partial<IJsonOptions> | boolean
   ) {
-    app.use(express.json(options.bodyParser));
+    if (typeof options === 'boolean') {
+      app.use(express.json());
+    } else {
+      app.use(express.json(options));
+    }
   }
 
   private static async urlEncoded(
     app: Application,
-    options: Partial<IConfigOptions>
+    options: Partial<IUrlEncodedOptions>
   ) {
-    app.use(express.urlencoded({ ...options.urlEncoded }));
+    app.use(express.urlencoded({ ...options }));
   }
 }
