@@ -136,10 +136,10 @@ const AppController = () => {
 {
   "message": "Error",
   "error": {
-        "stringValue": [ERROR MESSAGE],
-        "kind": [ERROR KIND],
-        "value": [ERROR VALUE],
-        "path": {ERROR PATH],
+        "stringValue": "ERROR MESSAGE",
+        "kind": "ERROR KIND",
+        "value": "ERROR VALUE",
+        "path": "ERROR PATH",
         "reason": {}
     }
 }
