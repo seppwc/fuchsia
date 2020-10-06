@@ -129,7 +129,7 @@ const AppController = () => {
 //successfull
 {
   "message": "Success",
-  "payload": T
+  "payload": "PAYLOAD DATA"
 }
 
 //error
