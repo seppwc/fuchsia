@@ -1,6 +1,6 @@
 import { FuchsiaApplication } from './FuchsiaApplication';
 import { IFuchsiaFactoryParams } from './interfaces';
-import { DatabaseLoader } from '@fuchsiajs/orm/database.loader';
+
 import { ConfigParser } from './Config.parser';
 
 export class FuchsiaFactory {
@@ -17,6 +17,7 @@ export class FuchsiaFactory {
     }
 
     if (database) {
+      const { DatabaseLoader } = await import('@fuchsiajs/orm/database.loader');
       let { adapter, uri, options } = database;
 
       if (!options) {
