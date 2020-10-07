@@ -1,4 +1,4 @@
-import { h, FuchsiaFactory, FuchsiaApplication } from '../packages/core';
+import { JSX, FuchsiaFactory, FuchsiaApplication } from '../packages/core';
 import { MongooseAdapter } from '../packages/orm';
 import { AppController } from './AppController';
 

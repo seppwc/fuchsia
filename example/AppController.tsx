@@ -1,4 +1,4 @@
-import { h } from '../packages/core';
+import { JSX } from '../packages/core';
 import {
   Route,
   Controller,
