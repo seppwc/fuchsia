@@ -11,7 +11,7 @@ export class Controller {
 
   constructor(private props: IControllerProps, public children: Route[]) {
     this.router = Router();
-    this.path = this.props.path || '/';
+    this.path = this.props.path;
     this.handleRoutes();
   }
 
