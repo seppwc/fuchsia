@@ -12,7 +12,7 @@ describe('Fuchsia Factory Create', () => {
 
   it.each([
     [{ port: 1234 }, 1234],
-    [{}, 8000],
+    [{}, 8080],
   ])(
     'should take %o port setting in config and set application setting or 8000',
     async (a, expected) => {
@@ -20,7 +20,7 @@ describe('Fuchsia Factory Create', () => {
         controllers: [new Controller({ path: '' }, [])],
         config: a,
       });
-      expect(app.port).toBe(expected);
+      expect(app.settings.port).toBe(expected);
     }
   );
 
