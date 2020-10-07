@@ -14,12 +14,12 @@ export class FuchsiaApplication {
   constructor(
     modules: IFuchsiaApplicationModules,
     public options: Partial<IConfigOptions>,
-    public port: number
+    public port: number = 8080
   ) {
     this.instance = express();
     this._settings = {
       ...this.instance.settings,
-      port: this.port || 8080,
+      port: this.port,
       ...options,
     };
 
