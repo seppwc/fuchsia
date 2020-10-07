@@ -4,7 +4,7 @@
     "module": "commonjs",
     "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "jsx": "react",
-    "jsxFactory": "h",
+    "jsxFactory": "JSX",
     "sourceMap": false,
     "suppressImplicitAnyIndexErrors": true,
     "outDir": "./dist",
@@ -31,5 +31,5 @@
     "baseUrl": "."
   },
   "exclude": ["node_modules", "**/*.spec.ts"],
-  "include": ["./packages/**/*.tsx", "./packages/**/*.ts"]
+  "include": ["./packages/**/*.tsx", "./packages/**/*.ts", "index.d.ts"]
 }
