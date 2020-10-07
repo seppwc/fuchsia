@@ -1,25 +1,25 @@
 import { Route } from '../Route';
-import { HTTP_METHODS } from '../constants';
+import { HTTP } from '../constants';
 
 describe('Route Component', () => {
   it.each([
     [
       { path: '/', method: 'GET', callback: async () => {} },
-      ['/', HTTP_METHODS.GET, Function],
+      ['/', HTTP.GET, Function],
     ],
     [
       { path: '/one', method: 'POST', callback: async () => {} },
-      ['/one', HTTP_METHODS.POST, Function],
+      ['/one', HTTP.POST, Function],
     ],
     [
       { path: '/two', method: 'DELETE', callback: async () => {} },
-      ['/two', HTTP_METHODS.DELETE, Function],
+      ['/two', HTTP.DELETE, Function],
     ],
     [
       { path: '/three', method: 'PUT', callback: async () => {} },
-      ['/three', HTTP_METHODS.PUT, Function],
+      ['/three', HTTP.PUT, Function],
     ],
-    [{ callback: async () => {} }, ['/', HTTP_METHODS.GET, Function]],
+    [{ callback: async () => {} }, ['/', HTTP.GET, Function]],
   ])('', (a, expected) => {
     const r = new Route(a);
     expect(r).toHaveProperty('path');

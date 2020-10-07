@@ -1,19 +1,19 @@
 import { Request } from 'express';
-import { HTTP_METHODS } from './constants';
+import { HTTP } from './constants';
 
 export interface IRouteProps {
-  method?: HTTP_METHODS | string;
+  method?: HTTP | string;
   path?: string;
   callback: (req: Request) => Promise<unknown>;
 }
 
 export class Route {
-  public method: HTTP_METHODS | string;
+  public method: HTTP | string;
   public path: string;
   public callback: (req: Request) => Promise<unknown>;
 
   constructor(public props: IRouteProps) {
-    this.method = props.method || HTTP_METHODS.GET;
+    this.method = props.method || HTTP.GET;
     this.path = props.path || '/';
     this.callback = props.callback;
   }
