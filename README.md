@@ -6,7 +6,7 @@ The JSX/TSX web application framework built upon express - build declarative web
 
 ```javascript
 import { JSX, FuchsiaFactory } from '@fuchsiajs/core';
-import { Controller, Route } from '@fuchsiajs/common';
+import { Controller, Route, HTTP } from '@fuchsiajs/common';
 
 const AppController = () => {
   const HelloWorld = () => (req): Promise<string> => {
@@ -15,7 +15,7 @@ const AppController = () => {
 
   return (
     <Controller path='/'>
-      <Route method='GET' path='/' callback={HelloWorld} />
+      <Route method={HTTP.GET} path='/' callback={HelloWorld} />
     </Controller>
   );
 };
@@ -58,11 +58,11 @@ const AppController = () => {
   return(
     <Controller path='/hello'>
       <Route method="get" path="/" callback={...}/>
-      <Route method="get" path="/:id" callback={...}/>
-      <Route method="post" path="/" callback={...}/>
-      <Route method="put" path="/:id" callback={...}/>
-      <Route method="patch" path="/:id" callback={...}/>
-      <Route method="delete" path="/:id" callback={...}/>
+      <Route method={HTTP.GET} path="/:id" callback={...}/>
+      <Route method={HTTP.POST} path="/" callback={...}/>
+      <Route method={HTTP.PUT} path="/:id" callback={...}/>
+      <Route method={HTTP.PATCH} path="/:id" callback={...}/>
+      <Route method={HTTP.DELETE} path="/:id" callback={...}/>
     </Controller>;
   )
 };
@@ -81,7 +81,7 @@ const AppController = () => {
 
   return(
     <Controller path='/hello'>
-      <Route method="get" path="/" callback={HelloWorld} />
+      <Route method={HTTP.GET} path="/" callback={HelloWorld} />
     </Controller>;
   )
 };
@@ -113,7 +113,7 @@ const AppController = () => {
 
   return(
     <Controller path='/hello'>
-      <Route method="get" path="/" callback={HelloWorld} />
+      <Route method={HTTP.GET} path="/" callback={HelloWorld} />
     </Controller>;
   )
 };
