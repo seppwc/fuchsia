@@ -1,6 +1,6 @@
 import { Router, Request } from 'express';
 import { Route } from './Route';
-import { HTTP_METHODS } from './constants';
+import { HTTP } from './constants';
 
 interface IControllerProps {
   path: string;
@@ -19,31 +19,31 @@ export class Controller {
   private async handleRoutes(): Promise<void> {
     this.children.forEach((child: Route) => {
       switch (child.method.toUpperCase()) {
-        case HTTP_METHODS.GET:
+        case HTTP.GET:
           this.router.get(child.path, async (req: Request, res) => {
             const response = await child.callback(req);
             res.send(response);
           });
           break;
-        case HTTP_METHODS.POST:
+        case HTTP.POST:
           this.router.post(child.path, async (req: Request, res) => {
             const response = await child.callback(req);
             res.send(response);
           });
           break;
-        case HTTP_METHODS.PUT:
+        case HTTP.PUT:
           this.router.put(child.path, async (req: Request, res) => {
             const response = await child.callback(req);
             res.send(response);
           });
           break;
-        case HTTP_METHODS.PATCH:
+        case HTTP.PATCH:
           this.router.patch(child.path, async (req: Request, res) => {
             const response = await child.callback(req);
             res.send(response);
           });
           break;
-        case HTTP_METHODS.DELETE:
+        case HTTP.DELETE:
           this.router.delete(child.path, async (req: Request, res) => {
             const response = await child.callback(req);
             res.send(response);
