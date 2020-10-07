@@ -5,24 +5,20 @@ The JSX/TSX web application framework built upon express - build declarative web
 ## Hello World
 
 ```javascript
-
-
-import { h , FuchsiaFactory } from '@fuchsiajs/core';
-import { Controller , Route } from '@fuchsiajs/common';
+import { JSX, FuchsiaFactory } from '@fuchsiajs/core';
+import { Controller, Route } from '@fuchsiajs/common';
 
 const AppController = () => {
-
-  const HelloWorld = () => (req):Promise<string> => {
-    return 'hello world'
+  const HelloWorld = () => (req): Promise<string> => {
+    return 'hello world';
   };
-
 
   return (
     <Controller path='/'>
       <Route method='GET' path='/' callback={HelloWorld} />
     </Controller>
   );
-}
+};
 
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
@@ -33,8 +29,6 @@ export const main = async () => {
 };
 
 main();
-
-
 ```
 
 ## Basic Routeing
