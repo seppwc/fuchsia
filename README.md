@@ -4,7 +4,7 @@ The JSX/TSX web application framework built upon express - build declarative web
 
 ## Hello World
 
-```javascript
+```jsx
 import { JSX, FuchsiaFactory } from '@fuchsiajs/core';
 import { Controller, Route, HTTP } from '@fuchsiajs/common';
 
@@ -39,7 +39,7 @@ FuchsiaJS makes use of JSX/TSX syntax to declaritively define controllers and ro
 
 a basic controller is a function that returns a controller component, controllers have one predefined prop "path" which is the base path for all routes the fall under this controllers scope.
 
-```javascript
+```jsx
 const AppController = () => {
   return(
     <Controller path='/hello'>
@@ -53,7 +53,7 @@ const AppController = () => {
 
 Routes are components which are nested in a controller, they define the individual route path and methods, they make use of the "method" prop to define which http method to use, and the "path" prop to define the url path for that route. if no method is set defaults to "all" http methods.
 
-```javascript
+```jsx
 const AppController = () => {
   return(
     <Controller path='/hello'>
@@ -72,7 +72,7 @@ const AppController = () => {
 
 Route callbacks are functions that get called when a route is executed. These are defined as a function which will receive one param (Request) within the controller scope and return promise, by default the return value will be included as a generic response type but including a json or render prop will return the desired type.
 
-```javascript
+```jsx
 const AppController = () => {
 
   const HelloWorld = (req: Request):Promise<string> => {
@@ -91,7 +91,7 @@ const AppController = () => {
 
 FuchsiaJS comes with a API response type to provide a consistent structure for data responses
 
-```javascript
+```jsx
 
 type FuchsiaResponse<T> = {
   message: 'Success' | 'Error',
@@ -148,7 +148,7 @@ inside is the async main function which calls FuchsiaFactory.create() to build o
 
 we then call await app.listen() to start listening for requests.
 
-```javascript
+```jsx
 // index.tsx
 export const main = async () => {
 
@@ -181,7 +181,7 @@ there are several ways to define settings for you application.
 
 define a "config" property inside the object you pass to FuchsiaFactory.create()
 
-```javascript
+```jsx
 // index.tsx
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
@@ -219,7 +219,7 @@ create a fuchsia.config.json file in the base folder of your project fuchsia wil
 
 index.ts doesnt need to import anything or pass any properties as the json file so found by fuchsia by default.
 
-```javascript
+```jsx
 /* index.tsx */
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
@@ -235,7 +235,7 @@ main();
 
 export default an object containing settings properties
 
-```javascript
+```jsx
 /* fuchsia.config.js */
 export default {
   json: true,
@@ -249,7 +249,7 @@ export default {
 
 at the moment fuchsia.config.js is not look for by default, so you will need to import it and pass the object to the config property
 
-```javascript
+```jsx
 /* index.ts */
 
 import config from './fuchsia.config.js';
@@ -277,7 +277,7 @@ just import `MongooseAdapter` from `@fuchsiajs/orm`
 
 create a "database" property in your `FuchsiaFactory.create()` object and pass the `MongooseAdapter` component to the `adapter` property and the connection uri string to the `uri` property
 
-```javascript
+```jsx
 /* index.ts */
 import { MongooseAdapter } from '@fuchsiajs/orm';
 
@@ -297,8 +297,8 @@ main();
 
 any other DB specific options can be passed to an `options` object nest inside the database object
 
-```javascript
-/* index.ts */
+```jsx
+/* index.tsx */
 import { MongooseAdapter } from '@fuchsiajs/orm';
 
 export const main = async () => {
