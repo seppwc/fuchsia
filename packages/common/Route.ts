@@ -12,7 +12,7 @@ export class Route {
   public callback: (req: Request) => Promise<unknown>;
 
   constructor(public props: IRouteProps) {
-    this.method = props.method || 'get';
+    this.method = props.method || 'GET';
     this.path = props.path || '/';
     this.callback = props.callback;
   }
