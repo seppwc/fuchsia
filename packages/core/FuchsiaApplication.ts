@@ -27,7 +27,7 @@ export class FuchsiaApplication {
 
     this.controllers = modules.controllers;
     this.loadOptions();
-    console.log(this._settings);
+
     this.handle();
   }
 

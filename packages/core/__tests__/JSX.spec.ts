@@ -1,15 +1,15 @@
-import { h } from '../h';
+import { JSX } from '../JSX';
 
 const mockFunction = jest.fn((a, b) => [a, b]);
 
 // return [{prop: 1}, [[{prop: 2}, ['Hello', 'There']],[{prop: 3},['Goodbye', 'Friend']]
 
-h(mockFunction, { prop: 1 }, [
-  h(mockFunction, { prop: 2 }, ['Hello', 'There']),
-  h(mockFunction, { prop: 3 }, ['Goodbye', 'Friend']),
+JSX(mockFunction, { prop: 1 }, [
+  JSX(mockFunction, { prop: 2 }, ['Hello', 'There']),
+  JSX(mockFunction, { prop: 3 }, ['Goodbye', 'Friend']),
 ]);
 
-describe('h pragma', () => {
+describe('JSX pragma', () => {
   it('should be called and call any children inside', () => {
     expect(mockFunction.mock.calls.length).toBe(3);
   });
