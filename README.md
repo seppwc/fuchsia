@@ -22,7 +22,7 @@ const AppController = () => {
       <Route method='GET' path='/' callback={HelloWorld} />
     </Controller>
   );
-
+}
 
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
@@ -43,7 +43,7 @@ FuchsiaJS makes use of JSX/TSX syntax to declaritively define controllers and ro
 
 ### Controllers
 
-a basic controller is a function that returns a controller component controllers have one predefined prop "path" which is the base path for all routes the fall under this controllers scope.
+a basic controller is a function that returns a controller component, controllers have one predefined prop "path" which is the base path for all routes the fall under this controllers scope.
 
 ```javascript
 const AppController = () => {
@@ -57,7 +57,7 @@ const AppController = () => {
 
 ### Routes
 
-Routes are components which are nested in a controller, they define the individual route and methods, the make use of the "method" prop to define which http method to use, and the "path" prop to define the url path for that route. if not method is set defaults to "all" http methods.
+Routes are components which are nested in a controller, they define the individual route path and methods, they make use of the "method" prop to define which http method to use, and the "path" prop to define the url path for that route. if no method is set defaults to "all" http methods.
 
 ```javascript
 const AppController = () => {
@@ -76,7 +76,7 @@ const AppController = () => {
 
 ### Route Callbacks
 
-Route callbacks the function that gets called when the route is executed. these are defined as functions which receive one param (Request) within the controller scope that return promise, by default the return value will be included in an express 'res.send' response
+Route callbacks are functions that get called when a route is executed. These are defined as a function which will receive one param (Request) within the controller scope and return promise, by default the return value will be included as a generic response type but including a json or render prop will return the desired type.
 
 ```javascript
 const AppController = () => {
@@ -94,6 +94,8 @@ const AppController = () => {
 ```
 
 ### Route Response Type
+
+FuchsiaJS comes with a API response type to provide a consistent structure for data responses
 
 ```javascript
 
@@ -127,17 +129,17 @@ const AppController = () => {
 //successfull
 {
   "message": "Success",
-  "payload": T
+  "payload": "PAYLOAD DATA"
 }
 
 //error
 {
   "message": "Error",
   "error": {
-        "stringValue": [ERROR MESSAGE],
-        "kind": [ERROR KIND],
-        "value": [ERROR VALUE],
-        "path": {ERROR PATH],
+        "stringValue": "ERROR MESSAGE",
+        "kind": "ERROR KIND",
+        "value": "ERROR VALUE",
+        "path": "ERROR PATH",
         "reason": {}
     }
 }
@@ -146,14 +148,14 @@ const AppController = () => {
 
 ### adding a controller to your application
 
-The central hub of the application is in the index{.ts|.js} file in the src folder.
+The central hub of the application is in the index{.tsx|.jsx} file in the src folder.
 
-inside is the async main function which calls FuchsiaFactory.create() to build our application object. the static create function takes in an object where we can define an array of controllers, which we pass our controller into.
+inside is the async main function which calls FuchsiaFactory.create() to build our application object. the static create function takes in an object where we can define an array of controllers, which we will pass our controller into.
 
 we then call await app.listen() to start listening for requests.
 
 ```javascript
-// index.ts
+// index.tsx
 export const main = async () => {
 
   // FuchsiaFactory.create() returns Promise<FuchsiaApplication>
@@ -179,22 +181,22 @@ there are several ways to define settings for you application.
 1. inside the object you pass to FuchsiaFactory.create()
 1. inside a Fuchsia.config.json file in the base project file
 1. inside a Fuchsia.config.js file in the base project file (import and spread only)
-1. inside a Fucsia.config.yaml file in the base project file (not yet supported)
+1. inside a Fuchsia.config.yaml file in the base project file (not yet supported)
 
 ### 1. via FuchsiaFactory.create()
 
 define a "config" property inside the object you pass to FuchsiaFactory.create()
 
 ```javascript
-// index.ts
+// index.tsx
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
     controllers: [<AppController />],
     config: {
       viewEngine: 'hbs',
       views: '/views',
-      static: '/publilc',
-      bodyParser: true,
+      static: '/public',
+      json: true,
       urlEncoded: true,
       port: 5555,
     },
@@ -212,7 +214,7 @@ create a fuchsia.config.json file in the base folder of your project fuchsia wil
 ```json
 /* fuchsia.config.json */
 {
-  "bodyParser": true,
+  "json": true,
   "viewEngine": "ejs",
   "views": "/views",
   "static": "/publilc",
@@ -224,7 +226,7 @@ create a fuchsia.config.json file in the base folder of your project fuchsia wil
 index.ts doesnt need to import anything or pass any properties as the json file so found by fuchsia by default.
 
 ```javascript
-/* index.ts */
+/* index.tsx */
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
     controllers: [<AppController />],
@@ -235,14 +237,14 @@ export const main = async () => {
 main();
 ```
 
-### 3. via Fucsia.config.js file in the base project file (via import only)
+### 3. via Fuchsia.config.js file in the base project file (via import only)
 
 export default an object containing settings properties
 
 ```javascript
 /* fuchsia.config.js */
 export default {
-  bodyParser: true,
+  json: true,
   viewEngine: 'ejs',
   views: '/views',
   static: '/publilc',
@@ -269,7 +271,7 @@ export const main = async () => {
 main();
 ```
 
-### 4. via Fucsia.config.yaml file in the base project file (not yet supported)
+### 4. via Fuchsia.config.yaml file in the base project file (not yet supported)
 
 it is proposed to work the same as with fuchsia.config.json but for those who prefer to use yaml.
 
