@@ -1,8 +1,8 @@
 import { Request } from 'express';
 
 export interface IRouteProps {
-  method: string;
-  path: string;
+  method?: string;
+  path?: string;
   callback: (req: Request) => Promise<unknown>;
 }
 
