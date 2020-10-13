@@ -19,15 +19,16 @@ export class FuchsiaApplication {
     this.instance = express();
     this._settings = {
       ...this.instance.settings,
-
       port: this.port,
-
       ...options,
+      urlEncoded: {
+        extended: true,
+        ...options.urlEncoded
+      },
     };
 
     this.controllers = modules.controllers;
     this.loadOptions();
-
     this.handle();
   }
 
