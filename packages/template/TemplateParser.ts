@@ -1,8 +1,4 @@
 
-interface ITemplateOptions {
-    delimiters: FuchsiaTemplateDelimiter
-}
-
 type FuchsiaTemplateDelimiter = {
     open: string,
     close: string
@@ -12,8 +8,8 @@ export class TemplateParser {
     private delimiter : FuchsiaTemplateDelimiter
     private regEx: RegExp
 
-    constructor(options?:Partial<ITemplateOptions>) {
-      this.delimiter = options.delimiters || { open: "{{", close: "}}" };
+    constructor() {
+      this.delimiter =  { open: "{{", close: "}}" };
       this.regEx = new RegExp(
         `${this.delimiter.open}(.*?)${this.delimiter.close}`,
         "g"
