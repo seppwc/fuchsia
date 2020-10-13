@@ -1,0 +1,25 @@
+{
+  "name": "@fuchsiajs/template",
+  "version": "1.0.1",
+  "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax (@template)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Phl3bas/FuchsiaJS"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Sepp Wikramaratna-Clarke",
+  "license": "MIT",
+  "dependencies": {
+    "html-minifier": "^4.0.0",
+    "tslib": "^2.0.1"
+  },
+  "peerDependencies": {
+    "express": "^4.x.x"
+  },
+  "devDependencies": {
+    "@types/html-minifier": "^4.0.0"
+  }
+}
