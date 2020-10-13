@@ -8,7 +8,7 @@ type FuchsiaTemplateDelimiter = {
     close: string
 }
 
-export class Template {
+export class TemplateParser {
     private delimiter : FuchsiaTemplateDelimiter
     private regEx: RegExp
 

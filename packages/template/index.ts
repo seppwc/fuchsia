@@ -1,4 +1,4 @@
-import {renderFile} from './Render'
+import {TemplateRenderer} from './TemplateRender'
 
-export {renderFile};
-export {renderFile as ____express}
+export {TemplateRenderer};
+export {TemplateRenderer as ____express}
