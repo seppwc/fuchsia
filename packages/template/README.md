@@ -4,6 +4,17 @@ Fuchsia Templates is the default templating engine for FuchsiaJS, and is a optio
 
 Fuchsia Templates was created in an attempt to lean away from the traditional "block" style SSR templates that most Javascript based templating engines use, and instead merges HTML templates with Javascript logic and control flow.
 
+
+## install
+
+```bash
+
+npm install @fuchsiajs/template
+
+yarn add @fuchsiajs/template
+
+```
+
 ## Example:
 
 ```html
@@ -70,7 +81,11 @@ the only "gotcha" is that you need to pass an anonymous arrow function, this is 
 
 ```
 
-### it can be used anywhere in your template!
+data passed to the template is automatically bound to "this" so we would refer to data object `{name: 'FuchsiaJS'}` by using `{{ ()=> this.name }}` in our template which will then evalute to `"FuchsiaJS"`
+
+
+
+## It can be used anywhere in your template!
 
 ```html
     <!-- 
@@ -102,9 +117,9 @@ the only "gotcha" is that you need to pass an anonymous arrow function, this is 
 ```
 
 
-### you can use conditional logic!
+## You can use conditional logic!
 
-As everything inside the `{{..}}` is evaluated, anything goes!
+As everything inside the `{{..}}` is evaluated, anything javascript goes! If/else, for/while loops, switch, ternarys, logical &&/|| etc...
 
 ```html
 
@@ -150,7 +165,7 @@ As everything inside the `{{..}}` is evaluated, anything goes!
 ```
 
 
-### dealing with data arrays are easy! just map over some data and return an array, the template engine will join all the data together for you!
+## Dealing with data in arrays is easy! the template engine will join all the data together for you!
 
 
 ```html
@@ -161,32 +176,94 @@ As everything inside the `{{..}}` is evaluated, anything goes!
      -->
 
     <p>
-        {{ ()=> this.items.map(item => item )}}
+        {{ ()=> this.items }}
     </p>
 
-    <!-- output: 
+    <!-- output -->
     
-        <p>TealVermillionMagenta</p>
+    <p>TealVermillionMagenta</p>
     
-     -->
 
 ```
 
 
-### want to use conditionals and loops and add in extra DOM nodes? just use template strings!
+## Want loop over DOM nodes? just map over the array and use template strings!
 
 lets refactor the previous example!
 
 ```html
     <!-- 
         data: {
-            visible: true
             items: ["Teal", "Vermillion", "Magenta"]
         }
      -->
 
     <ul>
-        {{ ()=> this.visible && this.items.map(item => `<li>${item}</li>` )}}
+        {{ ()=>  this.items.map(item => `<li>${item}</li>` )}}
+    </ul>
+
+
+    <ul>
+        <li>Teal</li>
+        <li>Vermillion</li>
+        <li>Magenta</li>
+    </ul>
+
+   
+
+```
+
+
+## You dont have to use FuchsiaJS to use Fuchsia Templates!
+
+here is an example using Express
+
+
+```javascript
+// ./src/index.js
+
+const express = require('express')
+const PORT = process.env.PORT || 8000
+const app = Express();
+
+// using app.engine to set the view engine to the fuchsiajs template renderer
+// we also set the extension to use to html (we plan on using our own extension in the future!)
+app.engine('html', require('@fuchsiajs/template').TemplateRenderer)
+
+// set out directory our views are in (this is infact the default set by express)
+app.set('views', process.cwd() + '/views')
+
+// set the view engine to look at html files in our ./views folder
+app.set('view engine', 'html')
+
+app.get('/', (req, res)=>{
+    // render our index file in ./views/index.html
+    // pass in out data, this object will be bound to templates 'this'
+    res.render('index', {title: 'FuchsiaJS', items: ['JSX on the Server!', 'Declarative Controllers and Models!', 'Awesome JS in HTML SSR Templating!']})
+})
+
+app.listen(PORT, ()=>{
+    console.log('Listening on http://localhost:' + PORT)
+})
+
+```
+
+
+```html
+<!-- ./views/index.html -->
+
+    <h1>{{ ()=> this.title}}</h1>
+    <ul>
+        {{ ()=> this.items.map(item => `<li>${item}</li>`)}}
+    </ul>
+
+
+<!-- Output -->
+    <h1>FuchsiaJS</h1>
+    <ul>
+        <li>JSX on the Server!</li>
+        <li>Declarative Controllers and Models!</li>
+        <li>Awesome JS in HTML SSR Templating!</li>
     </ul>
 
 ```
