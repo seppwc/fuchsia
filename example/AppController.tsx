@@ -4,8 +4,9 @@ import {
   Controller,
   Request,
   FuchsiaResponse,
+  HTTP,
 } from '../packages/common';
-import User, { UserModel } from './User';
+import { User, UserModel } from './User';
 
 export const AppController = (): Controller => {
   const GetUsers = async (): Promise<FuchsiaResponse<UserModel[]>> => {
@@ -63,10 +64,10 @@ export const AppController = (): Controller => {
   return (
     <Controller path='/'>
       <Route method='get' path='/' callback={GetUsers} />
-      <Route method='get' path='/:id' callback={GetOneUser} />
-      <Route method='post' path='/' callback={CreateUser} />
-      <Route method='put' path='/:id' callback={UpdateUser} />
-      <Route method='delete' path='/:id' callback={DeleteUser} />
+      <Route method={HTTP.GET} path='/:id' callback={GetOneUser} />
+      <Route method={HTTP.POST} path='/' callback={CreateUser} />
+      <Route method={HTTP.PUT} path='/:id' callback={UpdateUser} />
+      <Route method={HTTP.DELETE} path='/:id' callback={DeleteUser} />
     </Controller>
   );
 };

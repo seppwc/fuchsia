@@ -54,6 +54,8 @@ export class ConfigLoader {
     app: Application,
     options: Partial<IUrlEncodedOptions>
   ) {
-    app.use(express.urlencoded({ ...options }));
+    app.use(
+      express.urlencoded({ ...options, extended: options.extended || true })
+    );
   }
 }
