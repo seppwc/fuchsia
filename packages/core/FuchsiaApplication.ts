@@ -22,7 +22,8 @@ export class FuchsiaApplication {
       port: this.port,
       ...options,
       urlEncoded: {
-        extended: options.urlEncoded.extended || true,
+        extended: true,
+        ...options.urlEncoded
       },
     };
 

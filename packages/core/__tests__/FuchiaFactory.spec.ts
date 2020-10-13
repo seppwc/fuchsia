@@ -54,7 +54,7 @@ describe('Fuchsia Factory Create', () => {
   );
 
   it.each([
-    [{ extended: true }, true],
+    [{ extended: false }, false],
     [{ inflate: true }, true],
     [{ limit: 200 }, 200],
     [{ limit: '200KB' }, '200KB'],
@@ -70,8 +70,14 @@ describe('Fuchsia Factory Create', () => {
         controllers: [new Controller({ path: '' }, [])],
         config: { urlEncoded: a },
       });
+    
+      if(Object.entries(app.settings.urlEncoded).length > 1) {
+        expect(Object.entries(app.settings.urlEncoded)[1][1]).toBe(expected)
+      } else {
+        expect(Object.entries(app.settings.urlEncoded)[0][1]).toBe(expected)
+      }
 
-      expect(Object.entries(app.settings.urlEncoded)[0][1]).toBe(expected);
+      
     }
   );
 
