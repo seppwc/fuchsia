@@ -23,6 +23,7 @@
     "@types/jest": "^26.0.14",
     "@types/mongoose": "^5.7.36",
     "@types/node": "^14.10.3",
+    "@types/html-minifier": "^4.0.0",
     "jest": "^26.4.2",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.0",
@@ -32,8 +33,10 @@
   "dependencies": {
     "@fuchsiajs/common": "^1.0.0",
     "@fuchsiajs/orm": "^1.0.0",
+
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "html-minifier": "^4.0.0",
     "mongoose": "^5.10.5",
     "tslib": "^2.0.1"
   }
