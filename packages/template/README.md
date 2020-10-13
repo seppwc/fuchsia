@@ -81,11 +81,13 @@ the only "gotcha" is that you need to pass an anonymous arrow function, this is 
 
 ```
 
+
 data passed to the template is automatically bound to "this" so we would refer to data object `{name: 'FuchsiaJS'}` by using `{{ ()=> this.name }}` in our template which will then evalute to `"FuchsiaJS"`
 
 
 
 ## It can be used anywhere in your template!
+
 
 ```html
     <!-- 
@@ -117,9 +119,11 @@ data passed to the template is automatically bound to "this" so we would refer t
 ```
 
 
+
 ## You can use conditional logic!
 
 As everything inside the `{{..}}` is evaluated, anything javascript goes! If/else, for/while loops, switch, ternarys, logical &&/|| etc...
+
 
 ```html
 
@@ -165,7 +169,9 @@ As everything inside the `{{..}}` is evaluated, anything javascript goes! If/els
 ```
 
 
+
 ## Dealing with data in arrays is easy! the template engine will join all the data together for you!
+
 
 
 ```html
@@ -176,6 +182,7 @@ As everything inside the `{{..}}` is evaluated, anything javascript goes! If/els
      -->
 
     <p>
+
         {{ ()=> this.items }}
     </p>
 
@@ -184,10 +191,13 @@ As everything inside the `{{..}}` is evaluated, anything javascript goes! If/els
     <p>TealVermillionMagenta</p>
     
 
+
 ```
 
 
+
 ## Want loop over DOM nodes? just map over the array and use template strings!
+
 
 lets refactor the previous example!
 
@@ -199,6 +209,7 @@ lets refactor the previous example!
      -->
 
     <ul>
+
         {{ ()=>  this.items.map(item => `<li>${item}</li>` )}}
     </ul>
 
@@ -264,6 +275,7 @@ app.listen(PORT, ()=>{
         <li>JSX on the Server!</li>
         <li>Declarative Controllers and Models!</li>
         <li>Awesome JS in HTML SSR Templating!</li>
+
     </ul>
 
 ```

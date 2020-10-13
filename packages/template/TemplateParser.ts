@@ -1,4 +1,5 @@
 
+
 type FuchsiaTemplateDelimiter = {
     open: string,
     close: string
@@ -10,6 +11,7 @@ export class TemplateParser {
 
     constructor() {
       this.delimiter =  { open: "{{", close: "}}" };
+
       this.regEx = new RegExp(
         `${this.delimiter.open}(.*?)${this.delimiter.close}`,
         "g"
