@@ -21,6 +21,7 @@ export interface IConfigOptions {
   views: string;
   viewCache: boolean;
   'view engine': string;
+  'template renderer' : ()=>any,
   'x-powered-by': boolean;
 }
 

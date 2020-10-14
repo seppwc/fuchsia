@@ -7,7 +7,7 @@ export class FuchsiaFactory {
   public static async create(
     params: IFuchsiaFactoryParams
   ): Promise<FuchsiaApplication> {
-    // console.clear();
+    console.clear(); 
     let { config, database, ...p } = params;
 
     let parsedFileData = await ConfigParser.parse();
@@ -32,3 +32,5 @@ export class FuchsiaFactory {
     return await new FuchsiaApplication(p, rest, port);
   }
 }
+
+

@@ -3,3 +3,4 @@ dist
 .env
 Fuchsia.config.json
 package-lock.json
+views
