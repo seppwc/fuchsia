@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax (@core)",
   "main": "index.js",
+  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/Phl3bas/FuchsiaJS"
