@@ -7,6 +7,8 @@ interface IFuchsiaApplicationModules {
   controllers: [Controller];
 }
 
+type TemplateRenderer = (filePath: string, options: any, callback: any) => any
+
 export class FuchsiaApplication {
   instance: Application;
   private _settings: Partial<IConfigOptions>;
@@ -20,6 +22,7 @@ export class FuchsiaApplication {
     this._settings = {
       ...this.instance.settings,
       port: this.port,
+      "view engine" : "html",
       ...options,
       urlEncoded: {
         extended: true,
@@ -29,6 +32,7 @@ export class FuchsiaApplication {
 
     this.controllers = modules.controllers;
     this.loadOptions();
+
     this.handle();
   }
 
@@ -36,6 +40,7 @@ export class FuchsiaApplication {
     return this._settings;
   }
 
+  
   private async loadOptions(): Promise<void> {
     ConfigLoader.load(this.instance, this.options);
   }
@@ -46,9 +51,17 @@ export class FuchsiaApplication {
     });
   }
 
+  public async setTemplateEngine(ext: string, renderer: TemplateRenderer):Promise<FuchsiaApplication>{
+    await this.instance.engine(ext, renderer);
+    await this.instance.set('view engine', ext);
+    return this;
+  }
+
   public async listen(): Promise<void> {
     this.instance.listen(this._settings.port, () => {
       console.log('listening on port ' + this._settings.port);
     });
   }
 }
+
+
