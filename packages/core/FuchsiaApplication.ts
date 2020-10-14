@@ -58,8 +58,12 @@ export class FuchsiaApplication {
   }
 
   public async listen(): Promise<void> {
-    this.instance.listen(this._settings.port, () => {
-      console.log('listening on port ' + this._settings.port);
+ 
+
+   this.instance.listen(this._settings.port, () => {
+      console.log('%cFuchsiaJS Application Started!','color: fuchsia; font-style: italic')
+      console.log('-------------------------------')
+      console.log('Listening on http://localhost:' + this._settings.port );
     });
   }
 }
