@@ -13,18 +13,24 @@
 
 // const AppService = createService(AppService)
 
+import {User} from './User'
+
 export const service1 = {
     name: 'app', 
     methods: {
-        callback1: ()=> "hi app 1",
-        callback2: ()=> "hi app 2"
+        GetOne: async (): Promise<any> => {
+            console.log(process.env.NODE_ENV)
+            const users = User.find()
+            return users
+        },
+        GetMany: async (): Promise<any>=> "hi app 2"
     }
 }
 
 export const service2 = {
     name: 'auth', 
     methods: {
-        callback1: ()=> "hi auth 1",
-        callback2: ()=> "hi auth 2"
+        GetOne: async (): Promise<any>=> "hi auth 1",
+        GetMany:async (): Promise<any>=> "hi auth 2"
     }
 }

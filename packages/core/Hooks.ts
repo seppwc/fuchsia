@@ -3,7 +3,10 @@ import {FuchsiaApplication} from './FuchsiaApplication'
 
 export const {useService, useApplication} = (function(){
 
-    let services: Service[]
+    let services: Service[];
+    // let singletons: any[];
+    // let stratagies: any[];
+    // let request: any
 
     return {
         useApplication: function(app: FuchsiaApplication) {
@@ -13,10 +16,16 @@ export const {useService, useApplication} = (function(){
         },
         useService: function(str: string): ServiceMethods{
             return services.find((i)=> i.name === str).methods
-        }
+        },
+
+        // createService: function(){}, // Transforms either Object or Class to Service Object
+        // useRequest: function(){}, // Returns Request
+        // createGuard: function(){}, // Transform Object or Class to Stratagy Object
+        // useGuard: function(){}, // returns Stratagy
+        // createPipe: function(){}, // Transform Object or Class to Stratagy Object
+        // usePipe: function(){}, // returns Stratagy
+        // createModel: function(){}, // creates a single global instances of Class
+        // useModel: function(){} // returns the registered singleton instance of class
     }
 
 })()
-
-
-
