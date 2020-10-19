@@ -13,9 +13,6 @@
 
 // const AppService = createService(AppService)
 
-import {User} from './User'
-
-
 export const service1 = {
     name: 'app', 
     methods: {
