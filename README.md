@@ -5,27 +5,27 @@ The JSX/TSX web application framework built upon express - build declarative web
 ## Hello World
 
 ```jsx
-import { JSX, FuchsiaFactory } from '@fuchsiajs/core';
-import { Controller, Route, HTTP } from '@fuchsiajs/common';
+import { JSX, FuchsiaFactory, useApplication } from "@fuchsiajs/core";
+import { Controller, Route, HTTP } from "@fuchsiajs/common";
 
 const AppController = () => {
   const HelloWorld = () => (req): Promise<string> => {
-    return 'hello world';
+    return "hello world";
   };
 
   return (
-    <Controller path='/'>
-      <Route method={HTTP.GET} path='/' callback={HelloWorld} />
+    <Controller path="/">
+      <Route method={HTTP.GET} path="/" callback={HelloWorld} />
     </Controller>
   );
 };
 
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
-    controllers: [<AppController />],
+    controllers: [AppController],
   });
 
-  await app.listen();
+  useApplication(app);
 };
 
 main();
@@ -151,21 +151,14 @@ we then call await app.listen() to start listening for requests.
 ```jsx
 // index.tsx
 export const main = async () => {
-
   // FuchsiaFactory.create() returns Promise<FuchsiaApplication>
   const app: FuchsiaApplication = await FuchsiaFactory.create({
-    controllers: [<AppController />],
-    {/*
-      alternativly you can use
-
-      controllers: [new AppController()]
-    */}
+    controllers: [AppController],
   });
 
-  await app.listen();
+  useApplication(app);
 };
 main();
-
 ```
 
 ## Defining application configuration settings
@@ -185,18 +178,17 @@ define a "config" property inside the object you pass to FuchsiaFactory.create()
 // index.tsx
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
-    controllers: [<AppController />],
+    controllers: [AppController],
     config: {
-      viewEngine: 'hbs',
-      views: '/views',
-      static: '/public',
+      viewEngine: "hbs",
+      views: "/views",
+      static: "/public",
       json: true,
       urlEncoded: true,
       port: 5555,
     },
   });
-
-  await app.listen();
+  useApplication(app);
 };
 main();
 ```
@@ -223,10 +215,10 @@ index.ts doesnt need to import anything or pass any properties as the json file 
 /* index.tsx */
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
-    controllers: [<AppController />],
+    controllers: [AppController],
   });
 
-  await app.listen();
+  useApplication(app);
 };
 main();
 ```
@@ -239,9 +231,9 @@ export default an object containing settings properties
 /* fuchsia.config.js */
 export default {
   json: true,
-  viewEngine: 'ejs',
-  views: '/views',
-  static: '/publilc',
+  viewEngine: "ejs",
+  views: "/views",
+  static: "/publilc",
   urlEncoded: true,
   port: 5555,
 };
@@ -252,15 +244,15 @@ at the moment fuchsia.config.js is not look for by default, so you will need to 
 ```jsx
 /* index.ts */
 
-import config from './fuchsia.config.js';
+import config from "./fuchsia.config.js";
 
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
-    controllers: [<AppController />],
+    controllers: [AppController],
     config,
   });
 
-  await app.listen();
+  useApplication(app);
 };
 main();
 ```
@@ -279,18 +271,18 @@ create a "database" property in your `FuchsiaFactory.create()` object and pass t
 
 ```jsx
 /* index.ts */
-import { MongooseAdapter } from '@fuchsiajs/orm';
+import { MongooseAdapter } from "@fuchsiajs/orm";
 
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
-    controllers: [<AppController />],
+    controllers: [AppController],
     database: {
       adapter: <MongooseAdapter />,
       uri: process.env.DB_URI,
     },
   });
 
-  await app.listen();
+  useApplication(app);
 };
 main();
 ```
@@ -299,11 +291,11 @@ any other DB specific options can be passed to an `options` object nest inside t
 
 ```jsx
 /* index.tsx */
-import { MongooseAdapter } from '@fuchsiajs/orm';
+import { MongooseAdapter } from "@fuchsiajs/orm";
 
 export const main = async () => {
   const app: FuchsiaApplication = await FuchsiaFactory.create({
-    controllers: [<AppController />],
+    controllers: [AppController],
     database: {
       adapter: <MongooseAdapter />,
       uri: process.env.DB_URI,
@@ -314,7 +306,7 @@ export const main = async () => {
     },
   });
 
-  await app.listen();
+  useApplication(app);
 };
 main();
 ```
@@ -335,4 +327,88 @@ if using a Fuchsia.config.json / Fuchsia.config.js file these options can be inc
     "useUnifiedTopology": true
   }
 }
+```
+
+## Hooks
+
+FuchsiaJS comes with some built in hooks to help organise and transform code. This helps make the various building blocks of a project more modular and easier to test!
+
+## useApplication
+
+This is the main entry point for your application, you will build and configure your application using the various controllers, services and model building blocks we provide, pass that configured app to your FuchsiaFactory.create Method and then pass the resulting app to the useApplciation hook, this will initialise the application and also provides a top level closure over our application in order to provide all the other utility hooks.
+
+```javascript
+import {
+  JSX,
+  FuchsiaFactory,
+  FuchsiaApplication,
+  useApplication,
+} from "../packages/core";
+import { MongooseAdapter } from "../packages/orm";
+import { AppController } from "./AppController";
+
+export const main = async () => {
+  const app: FuchsiaApplication = await FuchsiaFactory.create({
+    controllers: [AppController],
+    database: {
+      adapter: <MongooseAdapter />,
+      uri: process.env.DB_URI,
+    },
+  });
+
+  // initialises the application and provides a top level closure around our application!!
+  useApplication(app);
+};
+
+main();
+```
+
+## useService / createService
+
+Call back methods can be declared inside the Controller scope like shown in above examples, and that works great, but it makes testing those functions a massive headache!, with the createService hook we can delare a service globally in our application and then with the useService hook we can call methods from a service we declared elsewhere in the application. pass in a string to declare the name of the service you wish to return the methods from, and then descructure those methods from the reponse.
+
+```javascript
+
+// in vanilla js, services must be declared as an object with a "name" and a "methods" property
+
+export createService({
+    name: 'app',
+    methods: {
+        GetOne: ()=> "hi app 1",
+        GetMany: ()=> "hi app 2"
+    }
+});
+```
+
+```javascript
+  // in typescript you can use decorators
+
+  @Service('app')
+  class service1 {
+
+    @Method()
+    GetOne(){
+      return "hi app 1"
+    }
+
+    @Method()
+    GetMany(){
+      return "hi app 2"
+    }
+  }
+
+
+  export createService(service1)
+
+```
+
+```javascript
+
+  const { GetOne } = useService('app')
+
+  return (
+    <Controller path='/'>
+      <Route json method={HTTP.GET} path='/' callback={GetOne} />
+    </Controller>
+
 ```
