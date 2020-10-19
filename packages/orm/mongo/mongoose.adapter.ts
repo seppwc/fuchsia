@@ -28,6 +28,7 @@ export class MongooseAdapter extends DatabaseAdapter {
   }
 
   async handleConnectionSuccess() {
+    if(process.env.NODE_ENV !== "production")
     console.log('Connection to Mongo database successful!');
   }
 }
