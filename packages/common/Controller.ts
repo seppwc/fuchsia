@@ -1,4 +1,4 @@
-import { HTTP } from './constants';
+
 import { Router, Request, Response } from 'express';
 import { Route } from './Route';
 

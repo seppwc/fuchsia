@@ -4,9 +4,9 @@
   "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax",
   "scripts": {
     "test": "jest",
-    "start:tsx": "ts-node -r dotenv/config ./example/index.tsx",
+    "develop": "nodemon --exec ts-node -r dotenv/config ./example/index.tsx",
     "data": "ts-node ./packages/orm/database.ts",
-    "start:js": "node -r dotenv/config ./dist/index.js",
+    "start": "node -r dotenv/config ./dist/index.js",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "clean": "rimraf dist",
@@ -20,11 +20,12 @@
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.8",
+    "@types/html-minifier": "^4.0.0",
     "@types/jest": "^26.0.14",
     "@types/mongoose": "^5.7.36",
     "@types/node": "^14.10.3",
-    "@types/html-minifier": "^4.0.0",
     "jest": "^26.4.2",
+    "nodemon": "^2.0.5",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.4.0",
     "ts-node": "^9.0.0",
@@ -33,7 +34,6 @@
   "dependencies": {
     "@fuchsiajs/common": "^1.0.0",
     "@fuchsiajs/orm": "^1.0.0",
-
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "html-minifier": "^4.0.0",

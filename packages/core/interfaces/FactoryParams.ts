@@ -1,8 +1,9 @@
-import { Controller } from '@fuchsiajs/common';
+import { Controller, Service } from '@fuchsiajs/common';
 import { IConfigOptions, IDatabaseParams } from './index';
 
 export interface IFuchsiaFactoryParams {
-  controllers: [Controller];
+  controllers: [()=>Controller];
+  services?: Service[]
   database?: IDatabaseParams;
   config?: Partial<IConfigOptions>;
 }

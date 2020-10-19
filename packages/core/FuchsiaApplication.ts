@@ -1,10 +1,11 @@
 import express, { Application } from 'express';
-import { Controller } from '@fuchsiajs/common';
+import { Controller, Service } from '@fuchsiajs/common';
 import { ConfigLoader } from './Config.Loader';
 import { IConfigOptions } from './interfaces';
 
 interface IFuchsiaApplicationModules {
-  controllers: [Controller];
+  controllers: [()=>Controller];
+  services?: Service[]
 }
 
 type TemplateRenderer = (filePath: string, options: any, callback: any) => any
@@ -12,7 +13,10 @@ type TemplateRenderer = (filePath: string, options: any, callback: any) => any
 export class FuchsiaApplication {
   instance: Application;
   private _settings: Partial<IConfigOptions>;
-  controllers: [Controller];
+  private _services: Service[]
+  controllers: [()=>Controller];
+
+
   constructor(
     modules: IFuchsiaApplicationModules,
     public options: Partial<IConfigOptions>,
@@ -29,15 +33,17 @@ export class FuchsiaApplication {
         ...options.urlEncoded
       },
     };
-
+    this._services = modules.services
     this.controllers = modules.controllers;
     this.loadOptions();
-
-    this.handle();
   }
 
   public get settings() {
     return this._settings;
+  }
+
+  public services() {
+    return this._services
   }
 
   
@@ -45,26 +51,26 @@ export class FuchsiaApplication {
     ConfigLoader.load(this.instance, this.options);
   }
 
-  private async handle(): Promise<void> {
-    this.controllers.forEach((c) => {
+  public async router(): Promise<void> {
+    this.controllers.forEach((controller) => {
+      const c = controller()
       this.instance.use(c.path, c.router);
     });
   }
 
-  public async setTemplateEngine(ext: string, renderer: TemplateRenderer):Promise<FuchsiaApplication>{
-    await this.instance.engine(ext, renderer);
-    await this.instance.set('view engine', ext);
+  public setTemplateEngine(ext: string, renderer: TemplateRenderer):FuchsiaApplication{
+      this.instance.engine(ext, renderer);
+      this.instance.set('view engine', ext);
     return this;
   }
 
   public async listen(): Promise<void> {
- 
-
-   this.instance.listen(this._settings.port, () => {
-      console.log('%cFuchsiaJS Application Started!','color: fuchsia; font-style: italic')
-      console.log('-------------------------------')
-      console.log('Listening on http://localhost:' + this._settings.port );
-    });
+    this.instance.listen(this._settings.port, () => {
+        console.clear()
+        console.log('%cFuchsiaJS Application Started!','color: fuchsia; font-style: italic')
+        console.log('-------------------------------')
+        console.log('Listening on http://localhost:' + this._settings.port );
+      });
   }
 }
 
