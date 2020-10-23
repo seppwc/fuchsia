@@ -41,7 +41,7 @@ Component Types
 
 ## Component props
 
-## Document
+## Schema
 
 - name: name of document
 
