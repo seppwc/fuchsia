@@ -1,4 +1,4 @@
-# FuchsiaJS
+![fuchsia js](https://raw.githubusercontent.com/Phl3bas/FuchsiaJS/master/assets/fuchsia-logo.svg)
 
 The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax
 
