@@ -1,24 +1,27 @@
 {
   "name": "@fuchsiajs/common",
   "version": "1.0.1",
-  "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax (@common)",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "description": "The JSX/TSX node framework - build declarative web servers using JSX/TSX syntax (@core)",
+  "author": "Sepp Wikramaratna-Clarke <Phl3bas87@gmail.com>",
+  "homepage": "https://github.com/Phl3bas/fuchsia#readme",
+  "license": "MIT",
+  "main": "dist/common.js",
+  "module": "dist/common.module.js",
+  "directories": {
+    "lib": "dist",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Phl3bas/FuchsiaJS"
+    "url": "git+https://github.com/Phl3bas/fuchsia.git"
   },
-  "publishConfig": {
-    "access": "public"
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "dependencies": {
-    "tslib": "^2.0.1",
-    "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.8",
-    "@types/node": "^14.10.3"
-  },
-  "author": "Sepp Wikramaratna-Clarke",
-  "license": "MIT"
+  "bugs": {
+    "url": "https://github.com/Phl3bas/fuchsia/issues"
+  }
 }

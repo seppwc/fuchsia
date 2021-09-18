@@ -1,22 +1,12 @@
 {
-  "name": "@fuchsiajs/core",
-  "version": "1.0.2",
-  "description": "The JSX/TSX node framework - build declarative web servers using JSX/TSX syntax (@core)",
-  "keywords": [
-    "node",
-    "jsx",
-    "tsx",
-    "typescript",
-    "webserver",
-    "framework",
-    "declaritive",
-    "server"
-  ],
+  "name": "mongoose",
+  "version": "1.0.0",
+  "description": "> TODO: description",
   "author": "Sepp Wikramaratna-Clarke <Phl3bas87@gmail.com>",
   "homepage": "https://github.com/Phl3bas/fuchsia#readme",
   "license": "MIT",
-  "main": "dist/core.js",
-  "module": "dist/core.module.js",
+  "main": "dist/mongoose.js",
+  "module": "dist/mongoose.module.js",
   "directories": {
     "lib": "dist",
     "test": "__tests__"

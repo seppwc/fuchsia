@@ -44,6 +44,5 @@ const createConfig = (inpt, outpt, format) => {
 };
 
 export default [
-  createConfig(input, pkg.main, 'cjs'),
   createConfig(input, pkg.module, 'esm'),
 ];
