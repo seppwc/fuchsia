@@ -1,3 +1,1 @@
-export default function common() {
-    // TODO
-}
+export { h } from './h';

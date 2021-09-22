@@ -7,6 +7,8 @@
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
+  "typings": "./dist/src/index",
+	"types": "./dist/src/index",
   "directories": {
     "lib": "dist",
     "test": "__tests__"
