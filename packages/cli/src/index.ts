@@ -1,3 +1,3 @@
 export default function cli() {
-    // TODO
+	// TODO
 }
