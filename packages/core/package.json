@@ -15,8 +15,10 @@
   "author": "Sepp Wikramaratna-Clarke <Phl3bas87@gmail.com>",
   "homepage": "https://github.com/Phl3bas/fuchsia#readme",
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/core.js",
+  "module": "dist/core.js",
+  "typings": "./dist/src/index",
+	"types": "./dist/src/index",
   "directories": {
     "lib": "dist",
     "test": "__tests__"

@@ -1,5 +1,5 @@
-import core from '../src';
-
 describe('core', () => {
-    it('needs tests');
+	it('needs tests', () => {
+		expect(true).toBe(true);
+	});
 });
