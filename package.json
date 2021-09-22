@@ -1,6 +1,7 @@
 {
   "name": "@fuchsiajs/main",
   "version": "1.0.1",
+  "private": true,
   "description": "The JSX/TSX web application framework built upon express - build declarative web servers using JSX/TSX syntax",
   "author": "Sepp Wikramaratna-Clarke",
   "repository": {
@@ -12,7 +13,7 @@
 		"packages/**"
 	],
   "scripts": {
-    "postinstall": "yarn lerna bootstrap",
+    	"postinstall": "yarn lerna bootstrap",
 		"docs": "docsify serve ./docs",
 		"lerna": "lerna",
 		"prepare": "husky install && lerna bootstrap",

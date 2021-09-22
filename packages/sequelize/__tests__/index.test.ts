@@ -1,5 +1,5 @@
-import sequelize from '../src';
-
 describe('sequelize', () => {
-    it('needs tests');
+	it('needs tests', () => {
+		expect(true).toBe(true);
+	});
 });

@@ -2,10 +2,10 @@
 	"compilerOptions": {
 		"baseUrl": ".",
 		"outDir": "dist",
-    "jsx" : "preserve",
-    "jsxFactory": "h",
+		"jsx" : "preserve",
+		"jsxFactory": "h",
 		"sourceMap": false,
-		"target": "es2016",
+		"target": "esnext",
 		"useDefineForClassFields": false,
 		"module": "esnext",
 		"moduleResolution": "node",
