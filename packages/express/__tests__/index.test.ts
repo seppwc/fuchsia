@@ -1,5 +1,5 @@
-import express from '../src';
-
 describe('express', () => {
-    it('needs tests');
+	it('needs tests', () => {
+		expect(true).toBe(true);
+	});
 });
